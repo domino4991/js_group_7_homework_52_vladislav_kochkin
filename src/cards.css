@@ -30,6 +30,7 @@
     -moz-box-shadow: .2em .2em .5em #333;
     -webkit-box-shadow: .2em .2em .5em #333;
     box-shadow: .2em .2em .5em #333;
+    vertical-align: middle;
 }
 
 .playingCards a.card {
