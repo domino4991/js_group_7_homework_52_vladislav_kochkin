@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = (props) => {
     let suit;
-    switch(props.suit.toLowerCase()) {
+    switch(props.suit) {
         case "hearts":
             suit = "♥"
             break;
@@ -20,7 +20,7 @@ const Card = (props) => {
             break;
     }
     return (
-        <div className={"card rank-" + props.rank.toLowerCase() + " " + props.suit.toLowerCase()}>
+        <div className={"card rank-" + props.rank + " " + props.suit}>
             <span className="rank">{props.rank.toUpperCase()}</span>
             <span className="suit">{suit}</span>
         </div>
