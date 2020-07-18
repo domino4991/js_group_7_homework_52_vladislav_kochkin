@@ -16,7 +16,7 @@ class App extends Component {
         this.cardDeck = new CardDeck();
         let cards = [...this.state.cards];
         cards = this.cardDeck.getCards(5);
-        document.querySelector('.close-cards').remove();
+        document.querySelector('.close-cards').innerHTML = '';
         this.setState({cards});
     }
 
