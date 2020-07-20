@@ -68,7 +68,7 @@ class App extends Component {
                     <div className="table-card">
                         {this.state.cards.map((card, i) => <Card key={card.ranks + card.suit} rank={card.ranks} suit={card.suit} selected={card.selected} selectedCard={() => this.selectedCard(i)} />)}
                     </div>
-                    <button onClick={this.createDeckInPage}>deal cards</button>
+                    <button onClick={this.createDeckInPage}>Deal cards</button>
                     <button onClick={this.printChangedCard} disabled={this.state.disabledBtnChange}>Changed Card</button>
                 </div>
             </div>
