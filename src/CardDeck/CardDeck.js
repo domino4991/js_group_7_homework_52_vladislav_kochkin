@@ -21,7 +21,6 @@ class CardDeck {
         for(let i = 0; i < howMany; i++) {
             cards.push(this.getCard()[0]);
         }
-        console.log(this.cards);
         return cards;
     }
 }
