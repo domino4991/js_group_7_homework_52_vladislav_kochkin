@@ -11,20 +11,46 @@ class App extends Component {
         super(props);
         this.state = {
             cards: [],
-            combination: null
+            combination: null,
+            disabledBtnChange: true
         };
     }
 
     createDeckInPage = () => {
-        const newCards = new CardDeck();
+        this.newCards = new CardDeck();
         let cards = [...this.state.cards];
-        cards = newCards.getCards(5);
+        cards = this.newCards.getCards(5);
         const combination = new PokerHand(cards).getOutcome();
         document.querySelector('.close-cards').innerHTML = '';
+        const disabledBtn = !this.state.disabledBtnChange;
         this.setState({
             cards,
-            combination
+            combination,
+            disabledBtnChange: disabledBtn
         });
+    }
+
+    selectedCard = i => {
+        let cards = [...this.state.cards];
+        cards[i].selected = !cards[i].selected;
+        this.countChange = cards.filter(item => item.selected === true).length;
+        this.setState({
+            cards: cards,
+        });
+    }
+
+    printChangedCard = () => {
+        const disabledBtn = !this.state.disabledBtnChange;
+        if(this.countChange !== 0) {
+            const cards = [...this.state.cards].filter(item => item.selected === false);
+            let changedCards  = [...cards, ...this.newCards.getCards(this.countChange)];
+            const combination = new PokerHand(changedCards).getOutcome();
+            this.setState({
+                cards: changedCards,
+                combination,
+                disabledBtnChange: disabledBtn
+            });
+        }
     }
 
     render() {
@@ -40,9 +66,10 @@ class App extends Component {
                         <div className="card back">*</div>
                     </div>
                     <div className="table-card">
-                        {this.state.cards.map(card => <Card key={card.ranks + card.suit} rank={card.ranks} suit={card.suit} />)}
+                        {this.state.cards.map((card, i) => <Card key={card.ranks + card.suit} rank={card.ranks} suit={card.suit} selected={card.selected} selectedCard={() => this.selectedCard(i)} />)}
                     </div>
-                    <button onClick={this.createDeckInPage}>Go</button>
+                    <button onClick={this.createDeckInPage}>deal cards</button>
+                    <button onClick={this.printChangedCard} disabled={this.state.disabledBtnChange}>Changed Card</button>
                 </div>
             </div>
         );
